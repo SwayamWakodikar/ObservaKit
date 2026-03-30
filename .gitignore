@@ -1,0 +1,20 @@
+# Build and dependencies
+node_modules/
+dist/
+build/
+
+# Environment and secrets
+.env
+.env.local
+
+# Project specific
+GUIDE_README.md
+
+# Logs
+*.log
+logs/
+
+# IDE files
+.vscode/
+.idea/
+.DS_Store
