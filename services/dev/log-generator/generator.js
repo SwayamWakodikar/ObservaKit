@@ -1,6 +1,13 @@
 import express from "express";
-
-const PORT = 5000;
+import fs from "fs";
+import path from "path"
+import dotenv from "dotenv";
+dotenv.config();
+import { fileURLToPath } from "url";
+const __filename=fileURLToPath(import.meta.url);
+const __dirname=path.dirname(__filename);
+const LOG_FILE_PATH=path.join(__dirname,"app.sample.log");
+const PORT = process.env.PORT || 5000;
 const app = express();
 
 const LOG_MESSAGES = [
@@ -12,7 +19,15 @@ setInterval(() => {
     const randomIndex = Math.floor(Math.random() * LOG_MESSAGES.length);
     const log = LOG_MESSAGES[randomIndex];
     const timestamp = new Date().toISOString();
-    console.log(`[${timestamp}] ${log}`);
+    const logEntry = `[${timestamp}] ${log}\n`;
+
+    console.log(logEntry);
+
+    fs.appendFile(LOG_FILE_PATH, logEntry, (err) => {
+        if (err) {
+            console.error("Failed to write to log file:", err);
+        }
+    });
 }, 2000);
 
 app.get("/", (req, res) => {
