@@ -6,7 +6,7 @@ dotenv.config();
 import { fileURLToPath } from "url";
 const __filename=fileURLToPath(import.meta.url);
 const __dirname=path.dirname(__filename);
-const LOG_FILE_PATH=path.join(__dirname,"app.sample.log");
+const LOG_FILE_PATH=path.join(__dirname,"logs","app.sample.log");
 const PORT = process.env.PORT || 5000;
 const app = express();
 
