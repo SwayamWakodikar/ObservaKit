@@ -22,12 +22,12 @@ services:
 
   log-generator:
     build:
-      context: ./services/dev/log-generator
+      context: ./services/dev/
     container_name: log-generator
     restart: always
     volumes:
       - ./services/dev/log-generator/logs:/app/logs
-    command: ["node", "generator.js"]
+    command: ["node", "log-generator/generator.js"]
 
   fluent-bit:
     image: fluent/fluent-bit:latest
@@ -42,11 +42,11 @@ services:
 
   log-consumer:
     build:
-      context: ./services/dev/log-consumer
+      context: ./services/dev/
     container_name: log-consumer
     restart: always
     depends_on:
       - kafka
-    command: ["node", "kafka-consumer.js"]
+    command: ["node", "log-consumer/kafka-consumer.js"]
     environment:
       - KAFKA_BROKER=kafka:9092
