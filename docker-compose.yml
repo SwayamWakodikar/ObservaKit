@@ -27,7 +27,7 @@ services:
     restart: always
     volumes:
       - ./services/dev/log-generator/logs:/app/logs
-    command: ["node", "log-generator/generator.js"]
+    command: [ "node", "log-generator/generator.js" ]
 
   fluent-bit:
     image: fluent/fluent-bit:latest
@@ -47,6 +47,6 @@ services:
     restart: always
     depends_on:
       - kafka
-    command: ["node", "log-consumer/kafka-consumer.js"]
+    command: [ "node", "log-consumer/kafka-consumer.js" ]
     environment:
       - KAFKA_BROKER=kafka:9092

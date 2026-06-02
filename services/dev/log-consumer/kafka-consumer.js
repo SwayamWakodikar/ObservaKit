@@ -1,8 +1,13 @@
 import { Kafka } from "kafkajs";
 
+const brokers = (process.env.KAFKA_BROKER ?? "localhost:9092")
+    .split(",")
+    .map((broker) => broker.trim())
+    .filter(Boolean);
+
 const kafka = new Kafka({
     clientId: "log-consumer",
-    brokers: ["localhost:9092"]
+    brokers,
 });
 
 const consumer = kafka.consumer({ groupId: "log-group" });
